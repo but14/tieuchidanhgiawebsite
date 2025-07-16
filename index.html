@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Công cụ So sánh Nhà cung cấp Website Resort/Khách sạn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 10px;
+        vertical-align: top;
+        text-align: left;
+        min-width: 150px;
+      }
+      th:first-child,
+      td:first-child {
+        min-width: 280px;
+        font-weight: 500;
+      }
+      th {
+        background-color: #f8fafc;
+        font-weight: 600;
+      }
+      td {
+        background-color: #ffffff;
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+      .tab-btn {
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        padding: 0.5rem 0.75rem;
+        margin-bottom: -1px;
+        font-size: 0.775rem;
+        font-weight: 400;
+        color: #4b5563;
+        transition: all 150ms;
+      }
+      .tab-btn:hover {
+        color: #059669; /* emerald-600 */
+      }
+      .tab-btn.active {
+        border-color: #059669; /* emerald-600 */
+        color: #047857; /* emerald-700 */
+        font-weight: 500;
+      }
+      td[contenteditable="true"] {
+        background-color: #fefce8;
+      }
+      td[contenteditable="true"]:focus {
+        outline: 2px solid #059669;
+        background-color: #ffffff;
+      }
+      .chart-container {
+        border: 1px solid #e2e8f0;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        background-color: #fff;
+      }
+      .evaluation-basis {
+        font-size: 0.8rem;
+        color: #475569;
+        background-color: #f1f5f9 !important;
+        padding: 6px 10px;
+      }
+      .group-score-display {
+        font-weight: bold;
+      }
+      .group-score-display .max-score {
+        color: #64748b;
+        font-weight: normal;
+      }
+      .pl-12 {
+        padding-left: 3rem;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800 p-4 sm:p-6 md:p-8">
+    <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-lg p-6">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6"
+      >
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">
+            Công cụ So sánh Nhà cung cấp Website Resort
+          </h1>
+          <p class="mt-1 text-gray-500">
+            Đánh giá toàn diện về năng lực, công nghệ, chi phí và hậu mãi.
+          </p>
+        </div>
+        <button
+          id="export-btn"
+          class="mt-4 sm:mt-0 w-full sm:w-auto bg-emerald-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-700 transition duration-300 flex items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 10-1.09-1.03l-2.905 3.079V2.75z"
+            />
+            <path
+              d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"
+            />
+          </svg>
+          Xuất ra Excel
+        </button>
+      </div>
+
+      <div class="border-b border-gray-200 mb-6">
+        <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+          <button class="tab-btn active" data-tab="tab0">0. Hướng dẫn</button>
+          <button class="tab-btn" data-tab="tab1">1. Thông tin chung</button>
+          <button class="tab-btn" data-tab="tab2">2. Bảng Chấm Điểm</button>
+          <button class="tab-btn" data-tab="tab3">
+            3. Công nghệ & Kỹ thuật
+          </button>
+          <button class="tab-btn" data-tab="tab4">
+            4. Giao diện & Tính năng
+          </button>
+          <button class="tab-btn" data-tab="tab5">5. Chi phí</button>
+          <button class="tab-btn" data-tab="tab6">6. Bàn giao & Hỗ trợ</button>
+          <button class="tab-btn" data-tab="tab7">7. Dashboard</button>
+          <button class="tab-btn" data-tab="tab8">8. Đánh giá SWOT</button>
+        </nav>
+      </div>
+
+      <div id="tab-container" class="overflow-x-auto">
+        <div id="tab0" class="tab-content active prose max-w-none">
+          <h3 class="font-semibold">0. Hướng dẫn sử dụng</h3>
+          <ol class="list-decimal list-inside space-y-2">
+            <li>
+              Vào <strong>Tab 1</strong>, đổi tên tiêu đề cột "Nhà cung cấp A",
+              "B", "C" thành tên thật và điền thông tin chung.
+            </li>
+            <li>
+              Điền các thông số chi tiết của từng nhà cung cấp vào các tab từ
+              <strong>3 đến 6</strong>.
+            </li>
+            <li>
+              Vào <strong>Tab 2 - Bảng Chấm Điểm</strong>, cho điểm từng tiêu
+              chí con (thang 0-10) dựa trên thông tin đã thu thập và cảm nhận
+              của bạn. Điểm số tổng hợp sẽ tự động tính toán.
+            </li>
+            <li>
+              Vào <strong>Tab 8 - Đánh giá SWOT</strong> để ghi lại các điểm
+              mạnh, yếu, cơ hội, thách thức của từng bên.
+            </li>
+            <li>
+              Cuối cùng, vào <strong>Tab 7 - Dashboard</strong> và nhấn nút "Cập
+              nhật Biểu đồ & Bảng" để xem so sánh trực quan.
+            </li>
+            <li>
+              Nhấn nút <strong>"Xuất ra Excel"</strong> ở góc trên bên phải để
+              lưu lại toàn bộ dữ liệu phân tích.
+            </li>
+          </ol>
+        </div>
+
+        <div id="tab1" class="tab-content">
+          <h3 class="font-semibold mb-2">1. Thông tin chung về Nhà cung cấp</h3>
+          <table id="table-1" class="w-full text-sm"></table>
+        </div>
+        <div id="tab2" class="tab-content">
+          <h3 class="font-semibold mb-2">2. Bảng Chấm Điểm Tổng Hợp</h3>
+          <p class="text-sm text-gray-500 mb-4">
+            Chấm điểm cho từng tiêu chí con (thang 0-10). Điểm nhóm và Tổng điểm
+            sẽ được tự động tính toán.
+          </p>
+          <table id="table-2" class="w-full text-sm"></table>
+        </div>
+        <div id="tab3" class="tab-content">
+          <h3 class="font-semibold mb-2">3. Phân tích Công nghệ & Kỹ thuật</h3>
+          <table id="table-3" class="w-full text-sm"></table>
+        </div>
+        <div id="tab4" class="tab-content">
+          <h3 class="font-semibold mb-2">4. Phân tích Giao diện & Tính năng</h3>
+          <table id="table-4" class="w-full text-sm"></table>
+        </div>
+        <div id="tab5" class="tab-content">
+          <h3 class="font-semibold mb-2">5. Phân tích Chi phí</h3>
+          <table id="table-5" class="w-full text-sm"></table>
+        </div>
+        <div id="tab6" class="tab-content">
+          <h3 class="font-semibold mb-2">6. Thông tin về Bàn giao & Hậu mãi</h3>
+          <table id="table-6" class="w-full text-sm"></table>
+        </div>
+
+        <div id="tab7" class="tab-content">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-xl">
+              7. Dashboard - Bảng điều khiển Trực quan
+            </h3>
+            <button
+              id="update-charts-btn"
+              class="bg-green-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-700 transition duration-300 flex items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M15.312 11.424a5.5 5.5 0 01-9.201-4.46_5.5 5.5 0 011.643-1.644l.11-.112a.75.75 0 011.06 1.06l-.11.112a4 4 0 00-1.196 1.196 4.002 4.002 0 006.585 3.235l.233.233A5.5 5.5 0 0115.312 11.424zM18.75 13a.75.75 0 01-.75.75h-3.5a.75.75 0 010-1.5h2.323l-3.3-3.3a.75.75 0 111.06-1.06l3.3 3.3V8.5a.75.75 0 011.5 0v3.75c0 .414-.336.75-.75.75z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Cập nhật Biểu đồ & Bảng
+            </button>
+          </div>
+          <div class="space-y-8">
+            <div class="chart-container">
+              <h4 class="font-bold text-center mb-4">Bảng xếp hạng tổng thể</h4>
+              <table id="table-7-summary" class="w-full text-sm"></table>
+            </div>
+            <div class="chart-container">
+              <h4 class="font-bold text-center mb-2">
+                So sánh Giá trị: Năng lực vs. Chi phí
+              </h4>
+              <canvas id="valueChart"></canvas>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div class="chart-container">
+                <h4 class="font-bold text-center mb-2">
+                  So sánh Năng lực & Kinh nghiệm
+                </h4>
+                <canvas id="competencyChart"></canvas>
+              </div>
+              <div class="chart-container">
+                <h4 class="font-bold text-center mb-2">
+                  So sánh Giải pháp Kỹ thuật
+                </h4>
+                <canvas id="techChart"></canvas>
+              </div>
+              <div class="chart-container">
+                <h4 class="font-bold text-center mb-2">
+                  So sánh Thiết kế & Tính năng
+                </h4>
+                <canvas id="featureChart"></canvas>
+              </div>
+              <div class="chart-container">
+                <h4 class="font-bold text-center mb-2">
+                  So sánh Hậu mãi & Hỗ trợ
+                </h4>
+                <canvas id="supportChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tab8" class="tab-content">
+          <h3 class="font-semibold mb-2">8. Phân tích SWOT</h3>
+          <table id="table-8-swot" class="w-full text-sm"></table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const sampleData = {
+        vendors: ["Nhà cung cấp A", "Nhà cung cấp B", "Nhà cung cấp C"],
+        "table-1": [
+          ["Hạng mục", "Nhà cung cấp A", "Nhà cung cấp B", "Nhà cung cấp C"],
+          ["Người liên hệ", "", "", ""],
+          ["Số năm kinh nghiệm", "", "", ""],
+          ["Dự án resort/khách sạn đã làm", "", "", ""],
+          ["Quy mô công ty (số nhân sự)", "", "", ""],
+          ["Thời gian thực hiện dự kiến", "", "", ""],
+        ],
+        "table-2-scores": {
+          "Nhà cung cấp A": {},
+          "Nhà cung cấp B": {},
+          "Nhà cung cấp C": {},
+        },
+        "table-3": [
+          [
+            "Hạng mục Kỹ thuật",
+            "Nhà cung cấp A",
+            "Nhà cung cấp B",
+            "Nhà cung cấp C",
+          ],
+          ["Nền tảng Frontend (React, Vue, Next.js...)", "", "", ""],
+          [
+            "Nền tảng Backend & CMS (Laravel, Node.js, WordPress...)",
+            "",
+            "",
+            "",
+          ],
+          ["Kiến trúc Hạ tầng (Cloud, VPS, Server riêng...)", "", "", ""],
+          ["Nhà cung cấp Hosting (AWS, Google Cloud, VNG...)", "", "", ""],
+          ["Cơ sở dữ liệu (MySQL, PostgreSQL, NoSQL...)", "", "", ""],
+          ["Cam kết Core Web Vitals (LCP, INP, CLS)", "", "", ""],
+          ["Tối ưu hình ảnh & Caching (CDN, WebP...)", "", "", ""],
+          ["Bảo mật ứng dụng (WAF, CSRF/XSS Prevention...)", "", "", ""],
+          [
+            "Bảo mật hạ tầng (SSL/TLS, Firewall, DDoS Protection...)",
+            "",
+            "",
+            "",
+          ],
+          ["Khả năng mở rộng & Chất lượng Code", "", "", ""],
+        ],
+        "table-4": [
+          [
+            "Hạng mục Tính năng",
+            "Nhà cung cấp A",
+            "Nhà cung cấp B",
+            "Nhà cung cấp C",
+          ],
+          ["Quy trình thiết kế UI/UX (Wireframe, Prototype...)", "", "", ""],
+          ["Tính độc quyền & Sáng tạo của giao diện", "", "", ""],
+          ["Module Đặt phòng (Tích hợp API / Xây dựng riêng)", "", "", ""],
+          ["Quản lý phòng, giá, và khuyến mãi", "", "", ""],
+          ["Tích hợp Channel Manager (Nếu có)", "", "", ""],
+          ["Cổng thanh toán tích hợp (Nội địa & Quốc tế)", "", "", ""],
+          ["Trải nghiệm quản trị (Dễ sử dụng, linh hoạt)", "", "", ""],
+          ["Quản lý nội dung động (Blog, Sự kiện, Dịch vụ...)", "", "", ""],
+          ["Module Đa ngôn ngữ & Đa tiền tệ", "", "", ""],
+          ["Tích hợp bên thứ ba (CRM, Email Marketing...)", "", "", ""],
+          ["Nền tảng kỹ thuật SEO (Schema, Sitemap...)", "", "", ""],
+          ["Tích hợp công cụ phân tích (Google Analytics 4...)", "", "", ""],
+        ],
+        "table-5": [
+          [
+            "Khoản mục chi phí",
+            "Nhà cung cấp A",
+            "Nhà cung cấp B",
+            "Nhà cung cấp C",
+          ],
+          ["Chi phí Thiết kế & Lập trình (trọn gói)", "", "", ""],
+          ["Chi phí bản quyền (Plugin, Theme...)", "", "", ""],
+          ["Chi phí Hosting & Tên miền (năm đầu)", "", "", ""],
+          ["Chi phí duy trì (từ năm thứ 2)", "", "", ""],
+          ["Các chi phí ẩn/phát sinh (nếu có)", "", "", ""],
+        ],
+        "table-6": [
+          [
+            "Hạng mục Hậu mãi",
+            "Nhà cung cấp A",
+            "Nhà cung cấp B",
+            "Nhà cung cấp C",
+          ],
+          ["Bàn giao Source Code & Tài liệu", "", "", ""],
+          ["Thời gian bảo hành (số tháng)", "", "", ""],
+          ["Phạm vi bảo hành (Lỗi kỹ thuật, hiệu năng...)", "", "", ""],
+          ["Chính sách sao lưu (Backup) dữ liệu", "", "", ""],
+          ["Hỗ trợ nội dung ban đầu (Số lượng bài viết/sản phẩm)", "", "", ""],
+          [
+            "Kênh & Thời gian hỗ trợ kỹ thuật (Email, Zalo, 24/7...)",
+            "",
+            "",
+            "",
+          ],
+          ["Chính sách nâng cấp, phát triển thêm", "", "", ""],
+        ],
+        "table-8-swot": [
+          ["Phân tích", "Nhà cung cấp A", "Nhà cung cấp B", "Nhà cung cấp C"],
+          ["Strengths (Điểm mạnh)", "", "", ""],
+          ["Weaknesses (Điểm yếu)", "", "", ""],
+          ["Opportunities (Cơ hội)", "", "", ""],
+          ["Threats (Thách thức)", "", "", ""],
+        ],
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        function createScoringTable() {
+          const table = document.getElementById("table-2");
+          const vendors = sampleData.vendors;
+          const scores = sampleData["table-2-scores"];
+
+          const structure = [
+            {
+              key: "A",
+              title: "A. NĂNG LỰC & KINH NGHIỆM",
+              weight: 15,
+              children: [
+                {
+                  key: "A1",
+                  title: "1. Hồ sơ năng lực & Các dự án tương tự",
+                  weight: 8,
+                },
+                {
+                  key: "A2",
+                  title: "2. Quy trình làm việc, tư vấn & quy mô công ty",
+                  weight: 7,
+                },
+              ],
+            },
+            {
+              key: "B",
+              title: "B. GIẢI PHÁP KỸ THUẬT",
+              weight: 30,
+              children: [
+                {
+                  key: "B1",
+                  title: "1. Nền tảng Frontend & Backend/CMS",
+                  weight: 6,
+                  basis: "Nền tảng Backend/CMS (Tab 3)",
+                },
+                {
+                  key: "B2",
+                  title: "2. Kiến trúc hạ tầng & CSDL",
+                  weight: 6,
+                  basis: "Kiến trúc Hạ tầng (Tab 3)",
+                },
+                {
+                  key: "B3",
+                  title: "3. Tối ưu hiệu năng & Core Web Vitals",
+                  weight: 7,
+                  basis: "Cam kết Core Web Vitals (Tab 3)",
+                },
+                {
+                  key: "B4",
+                  title: "4. Giải pháp bảo mật (Ứng dụng & Hạ tầng)",
+                  weight: 6,
+                  basis: "Bảo mật ứng dụng (Tab 3)",
+                },
+                {
+                  key: "B5",
+                  title: "5. Chất lượng code & Khả năng mở rộng",
+                  weight: 5,
+                },
+              ],
+            },
+            {
+              key: "C",
+              title: "C. THIẾT KẾ & TÍNH NĂNG",
+              weight: 30,
+              children: [
+                {
+                  key: "C1",
+                  title: "1. Quy trình & Chất lượng thiết kế UI/UX",
+                  weight: 6,
+                  basis: "Quy trình thiết kế UI/UX (Tab 4)",
+                },
+                {
+                  key: "C2",
+                  title: "2. Hệ thống Đặt phòng & Quản lý giá",
+                  weight: 7,
+                  basis: "Module Đặt phòng (Tab 4)",
+                },
+                {
+                  key: "C3",
+                  title: "3. Trải nghiệm & Tính năng CMS",
+                  weight: 5,
+                  basis: "Trải nghiệm quản trị (Tab 4)",
+                },
+                {
+                  key: "C4",
+                  title: "4. Tích hợp thanh toán & các bên thứ ba",
+                  weight: 4,
+                },
+                {
+                  key: "C5",
+                  title: "5. Nền tảng kỹ thuật SEO & Analytics",
+                  weight: 5,
+                },
+                { key: "C6", title: "6. Đa ngôn ngữ & Đa tiền tệ", weight: 3 },
+              ],
+            },
+            {
+              key: "D",
+              title: "D. CHI PHÍ",
+              weight: 10,
+              children: [
+                {
+                  key: "D1",
+                  title: "1. Chi phí triển khai ban đầu",
+                  weight: 6,
+                  basis: "Chi phí Thiết kế (Tab 5)",
+                },
+                {
+                  key: "D2",
+                  title: "2. Chi phí duy trì & chi phí ẩn",
+                  weight: 4,
+                  basis: "Chi phí duy trì (Tab 5)",
+                },
+              ],
+            },
+            {
+              key: "E",
+              title: "E. HẬU MÃI & HỖ TRỢ",
+              weight: 15,
+              children: [
+                {
+                  key: "E1",
+                  title: "1. Thời gian & Phạm vi bảo hành",
+                  weight: 5,
+                  basis: "Thời gian bảo hành (Tab 6)",
+                },
+                {
+                  key: "E2",
+                  title: "2. Bàn giao (Source code, tài liệu)",
+                  weight: 4,
+                },
+                {
+                  key: "E3",
+                  title: "3. Hỗ trợ kỹ thuật & Chính sách Backup",
+                  weight: 6,
+                  basis: "Chính sách sao lưu (Tab 6)",
+                },
+              ],
+            },
+          ];
+
+          let headHTML = `<thead><tr><th>Tiêu chí đánh giá</th><th>Trọng số</th>`;
+          vendors.forEach(
+            (v) => (headHTML += `<th contenteditable="true">${v}</th>`)
+          );
+          headHTML += `</tr></thead>`;
+
+          let bodyHTML = `<tbody>`;
+          structure.forEach((group) => {
+            bodyHTML += `<tr class="bg-gray-100 font-bold">
+                        <td>${group.title}</td>
+                        <td data-weight-group="${group.key}">${
+              group.weight
+            }</td>
+                        ${vendors
+                          .map(
+                            (v, i) =>
+                              `<td class="group-score-display" data-score-group="${group.key}" data-vendor-index="${i}"><span class="score">0.0</span> <span class="max-score">/ ${group.weight}</span></td>`
+                          )
+                          .join("")}
+                    </tr>`;
+            group.children.forEach((item) => {
+              bodyHTML += `<tr>
+                            <td class="pl-8">${item.title}</td>
+                            <td data-weight="${item.key}">${item.weight}</td>
+                            ${vendors
+                              .map(
+                                (v, i) =>
+                                  `<td data-score="${
+                                    item.key
+                                  }" data-vendor-index="${i}" contenteditable="true">${
+                                    scores[v]?.[item.key] || ""
+                                  }</td>`
+                              )
+                              .join("")}
+                        </tr>`;
+              if (item.basis) {
+                bodyHTML += `<tr><td colspan="${
+                  vendors.length + 2
+                }" class="evaluation-basis" data-basis-for="${
+                  item.key
+                }"><strong>Cơ sở (Tab X):</strong></td></tr>`;
+              }
+            });
+          });
+          bodyHTML += `<tr class="font-bold bg-emerald-100 text-lg">
+                    <td>TỔNG CỘNG (Thang 100)</td>
+                    <td id="total-weight">100</td>
+                    ${vendors
+                      .map((v, i) => `<td id="total-score-${i}">0.0</td>`)
+                      .join("")}
+                </tr>`;
+          bodyHTML += `</tbody>`;
+
+          table.innerHTML = headHTML + bodyHTML;
+        }
+
+        function populateSimpleTable(tableId, data) {
+          const table = document.getElementById(tableId);
+          if (!table || !data) return;
+          let html = `<thead><tr>${data[0]
+            .map((h, i) =>
+              i === 0 ? `<th>${h}</th>` : `<th contenteditable="true">${h}</th>`
+            )
+            .join("")}</tr></thead><tbody>`;
+          data.slice(1).forEach((row) => {
+            html += `<tr>${row
+              .map((cell, index) => {
+                const cellContent = cell.toString().replace(/\n/g, "<br>");
+                const isEditable = index !== 0; // First column is not editable
+                return `<td ${
+                  isEditable ? 'contenteditable="true"' : ""
+                }>${cellContent}</td>`;
+              })
+              .join("")}</tr>`;
+          });
+          html += "</tbody>";
+          table.innerHTML = html;
+        }
+
+        function loadAllData() {
+          populateSimpleTable("table-1", sampleData["table-1"]);
+          createScoringTable();
+          populateSimpleTable("table-3", sampleData["table-3"]);
+          populateSimpleTable("table-4", sampleData["table-4"]);
+          populateSimpleTable("table-5", sampleData["table-5"]);
+          populateSimpleTable("table-6", sampleData["table-6"]);
+          populateSimpleTable("table-8-swot", sampleData["table-8-swot"]);
+        }
+
+        const tabs = document.querySelectorAll(".tab-btn");
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", (e) => {
+            document
+              .querySelector(".tab-btn.active")
+              .classList.remove("active");
+            e.target.classList.add("active");
+            document
+              .querySelector(".tab-content.active")
+              .classList.remove("active");
+            document
+              .getElementById(e.target.dataset.tab)
+              .classList.add("active");
+          });
+        });
+
+        function getCellValue(selector) {
+          const element = document.querySelector(selector);
+          return element
+            ? parseFloat(element.innerText.replace(/[^0-9.-]+/g, "")) || 0
+            : 0;
+        }
+
+        function calculateScores() {
+          const vendors = Array.from(
+            document.querySelectorAll("#table-2 thead th[contenteditable]")
+          ).map((th) => th.innerText);
+          const numVendors = vendors.length;
+          const groups = ["A", "B", "C", "D", "E"];
+          let groupScores = Array(numVendors)
+            .fill(null)
+            .map(() => ({}));
+          let totalScores = Array(numVendors).fill(0);
+
+          vendors.forEach((_, vendorIndex) => {
+            let currentTotalScore = 0;
+            groups.forEach((groupKey) => {
+              let currentGroupScore = 0;
+              document
+                .querySelectorAll(
+                  `td[data-score][data-vendor-index="${vendorIndex}"]`
+                )
+                .forEach((cell) => {
+                  const scoreKey = cell.dataset.score;
+                  if (scoreKey.startsWith(groupKey)) {
+                    const weight = getCellValue(
+                      `td[data-weight="${scoreKey}"]`
+                    );
+                    const score = getCellValue(
+                      `td[data-score="${scoreKey}"][data-vendor-index="${vendorIndex}"]`
+                    );
+                    currentGroupScore += (score * weight) / 10;
+                  }
+                });
+
+              const groupScoreCell = document.querySelector(
+                `td[data-score-group="${groupKey}"][data-vendor-index="${vendorIndex}"] .score`
+              );
+              if (groupScoreCell)
+                groupScoreCell.innerText = currentGroupScore.toFixed(1);
+
+              const groupWeight = getCellValue(
+                `td[data-weight-group="${groupKey}"]`
+              );
+              groupScores[vendorIndex][groupKey] =
+                groupWeight > 0 ? (currentGroupScore / groupWeight) * 10 : 0;
+
+              currentTotalScore += currentGroupScore;
+            });
+            totalScores[vendorIndex] = currentTotalScore;
+            const totalScoreCell = document.getElementById(
+              `total-score-${vendorIndex}`
+            );
+            if (totalScoreCell)
+              totalScoreCell.innerText = currentTotalScore.toFixed(1);
+          });
+          return { totalScores, groupScores, vendorNames: vendors };
+        }
+
+        function getTableData(tableId) {
+          const table = document.getElementById(tableId);
+          if (!table) return [];
+          const data = [];
+          const rows = table.querySelectorAll("tbody tr");
+          rows.forEach((row) => {
+            const rowData = [];
+            row.querySelectorAll("td").forEach((cell) => {
+              rowData.push(cell.innerText);
+            });
+            data.push(rowData);
+          });
+          return data;
+        }
+
+        function updateEvaluationBasis() {
+          const basisMap = {
+            B1: { tableId: "table-3", term: "Nền tảng Backend", tab: 3 },
+            B2: { tableId: "table-3", term: "Kiến trúc Hạ tầng", tab: 3 },
+            B3: { tableId: "table-3", term: "Cam kết Core Web Vitals", tab: 3 },
+            B4: { tableId: "table-3", term: "Bảo mật ứng dụng", tab: 3 },
+            C1: {
+              tableId: "table-4",
+              term: "Quy trình thiết kế UI/UX",
+              tab: 4,
+            },
+            C2: { tableId: "table-4", term: "Module Đặt phòng", tab: 4 },
+            C3: { tableId: "table-4", term: "Trải nghiệm quản trị", tab: 4 },
+            D1: { tableId: "table-5", term: "Chi phí Thiết kế", tab: 5 },
+            D2: { tableId: "table-5", term: "Chi phí duy trì", tab: 5 },
+            E1: { tableId: "table-6", term: "Thời gian bảo hành", tab: 6 },
+            E3: { tableId: "table-6", term: "Chính sách sao lưu", tab: 6 },
+          };
+
+          const vendors = Array.from(
+            document.querySelectorAll("#table-2 thead th[contenteditable]")
+          ).map((th) => th.innerText);
+
+          Object.keys(basisMap).forEach((itemKey) => {
+            const basisCell = document.querySelector(
+              `[data-basis-for="${itemKey}"]`
+            );
+            if (basisCell) {
+              const { tableId, term, tab } = basisMap[itemKey];
+              const tableData = getTableData(tableId);
+              const dataRow = tableData.find((r) => r[0].includes(term));
+
+              let basisText = `<strong>Cơ sở (Tab ${tab}):</strong> `;
+              if (dataRow) {
+                basisText += vendors
+                  .map((v, i) => `${v}: ${dataRow[i + 1] || "N/A"}`)
+                  .join("; ");
+              } else {
+                basisText += "Không tìm thấy dữ liệu liên quan.";
+              }
+              basisCell.innerHTML = basisText;
+            }
+          });
+        }
+
+        let charts = {};
+        function updateDashboard() {
+          const { totalScores, groupScores, vendorNames } = calculateScores();
+
+          const costTableData = getTableData("table-5");
+          const costDevRow = costTableData.find((r) =>
+            r[0].includes("Thiết kế & Lập trình")
+          );
+          const costDev = costDevRow
+            ? costDevRow
+                .slice(1)
+                .map((c) => parseInt(c.replace(/[^0-9.-]+/g, "")) || 0)
+            : Array(vendorNames.length).fill(0);
+
+          Object.values(charts).forEach((chart) => chart.destroy());
+
+          const summaryTable = document.querySelector("#table-7-summary");
+          if (summaryTable) {
+            const vendorData = vendorNames
+              .map((name, index) => ({
+                name: name,
+                score: totalScores[index],
+                cost: costDev[index],
+              }))
+              .sort((a, b) => b.score - a.score);
+
+            let summaryBodyHTML = "";
+            vendorData.forEach((vendor, index) => {
+              summaryBodyHTML += `<tr>
+                            <td class="text-center font-bold">${index + 1}</td>
+                            <td>${vendor.name}</td>
+                            <td>${vendor.score.toFixed(1)}</td>
+                            <td>${
+                              vendor.cost > 0
+                                ? parseInt(vendor.cost).toLocaleString(
+                                    "vi-VN"
+                                  ) + "đ"
+                                : "N/A"
+                            }</td>
+                            <td contenteditable="true"></td>
+                        </tr>`;
+            });
+            summaryTable.innerHTML = `<thead><tr><th>Xếp hạng</th><th>Nhà cung cấp</th><th>Tổng điểm</th><th>Chi phí triển khai</th><th>Ghi chú</th></tr></thead><tbody>${summaryBodyHTML}</tbody>`;
+          }
+
+          charts.valueChart = new Chart(
+            document.getElementById("valueChart").getContext("2d"),
+            {
+              type: "bar",
+              data: {
+                labels: vendorNames,
+                datasets: [
+                  {
+                    label: "Tổng điểm Năng lực (Thang 100)",
+                    data: totalScores,
+                    backgroundColor: "rgba(5, 150, 105, 0.7)",
+                    yAxisID: "y-score",
+                    order: 1,
+                  },
+                  {
+                    label: "Chi phí triển khai (VND)",
+                    data: costDev,
+                    backgroundColor: "rgba(249, 115, 22, 0.7)",
+                    yAxisID: "y-cost",
+                    order: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                plugins: { tooltip: { mode: "index", intersect: false } },
+                scales: {
+                  "y-score": {
+                    type: "linear",
+                    position: "left",
+                    title: { display: true, text: "Điểm Năng lực" },
+                    min: 0,
+                    max: 100,
+                  },
+                  "y-cost": {
+                    type: "linear",
+                    position: "right",
+                    title: { display: true, text: "Chi phí (VND)" },
+                    grid: { drawOnChartArea: false },
+                  },
+                },
+              },
+            }
+          );
+
+          const createGroupChart = (canvasId, label, groupKey, colors) => {
+            charts[canvasId] = new Chart(
+              document.getElementById(canvasId).getContext("2d"),
+              {
+                type: "bar",
+                data: {
+                  labels: vendorNames,
+                  datasets: [
+                    {
+                      label: label,
+                      data: vendorNames.map((v, i) => groupScores[i][groupKey]),
+                      backgroundColor: colors,
+                    },
+                  ],
+                },
+                options: {
+                  responsive: true,
+                  plugins: { legend: { display: false } },
+                  scales: { y: { beginAtZero: true, max: 10 } },
+                },
+              }
+            );
+          };
+
+          const chartColors = ["#3b82f6", "#10b981", "#f97316", "#8b5cf6"];
+          createGroupChart(
+            "competencyChart",
+            "Điểm Năng lực",
+            "A",
+            chartColors
+          );
+          createGroupChart("techChart", "Điểm Kỹ thuật", "B", chartColors);
+          createGroupChart(
+            "featureChart",
+            "Điểm Thiết kế & Tính năng",
+            "C",
+            chartColors
+          );
+          createGroupChart("supportChart", "Điểm Hậu mãi", "E", chartColors);
+        }
+
+        document
+          .getElementById("update-charts-btn")
+          .addEventListener("click", () => {
+            calculateScores();
+            updateEvaluationBasis();
+            updateDashboard();
+          });
+
+        document
+          .getElementById("export-btn")
+          .addEventListener("click", function () {
+            const wb = XLSX.utils.book_new();
+            const sheetNames = [
+              "0_HuongDan",
+              "1_ThongTinChung",
+              "2_ChamDiem",
+              "3_CongNghe",
+              "4_TinhNang",
+              "5_ChiPhi",
+              "6_HauMai",
+              "7_Dashboard",
+              "8_SWOT",
+            ];
+            const tableIds = [
+              "table-1",
+              "table-2",
+              "table-3",
+              "table-4",
+              "table-5",
+              "table-6",
+              "table-7-summary",
+              "table-8-swot",
+            ];
+
+            tableIds.forEach((id, index) => {
+              const table = document.getElementById(id);
+              if (table) {
+                // Clone the table to modify it for export without affecting the UI
+                const tableClone = table.cloneNode(true);
+                // For scoring table, replace input cells with their values
+                if (id === "table-2") {
+                  tableClone
+                    .querySelectorAll('td[contenteditable="true"]')
+                    .forEach((cell) => {
+                      cell.removeAttribute("contenteditable");
+                    });
+                }
+                const ws = XLSX.utils.table_to_sheet(tableClone, { raw: true });
+                XLSX.utils.book_append_sheet(wb, ws, sheetNames[index + 1]);
+              }
+            });
+            const vendorName =
+              document.querySelector("#table-1 th:nth-child(2)")?.innerText ||
+              "SoSanh";
+            XLSX.writeFile(
+              wb,
+              `So_Sanh_Nha_Cung_Cap_${vendorName.replace(/\s+/g, "_")}.xlsx`
+            );
+          });
+
+        loadAllData();
+        calculateScores();
+        updateEvaluationBasis();
+        document
+          .getElementById("tab-container")
+          .addEventListener("input", (e) => {
+            if (
+              e.target.matches(
+                'td[contenteditable="true"], th[contenteditable="true"]'
+              )
+            ) {
+              calculateScores();
+              updateEvaluationBasis();
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
