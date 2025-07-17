@@ -48,7 +48,7 @@
         cursor: pointer;
         padding: 0.75rem 0.5rem;
         margin-bottom: -1px;
-        font-size: 0.84rem;
+        font-size: 0.875rem;
         font-weight: 400;
         color: #4b5563;
         transition: all 150ms;
@@ -558,7 +558,7 @@
 
           let bodyHTML = `<tbody>`;
           structure.forEach((group) => {
-            bodyHTML += `<tr class="bg-gray-100 font-bold">
+            bodyHTML += `<tr class="bg-emerald-100 text-emerald-900 font-bold text-base border-t-2 border-gray-300">
                         <td>${group.title}</td>
                         <td data-weight-group="${group.key}">${
               group.weight
@@ -566,7 +566,7 @@
                         ${vendors
                           .map(
                             (v, i) =>
-                              `<td class="group-score-display" data-score-group="${group.key}" data-vendor-index="${i}"><span class="score">0.0</span> <span class="max-score">/ ${group.weight}</span></td>`
+                              `<td class="group-score-display bg-emerald-200" data-score-group="${group.key}" data-vendor-index="${i}"><span class="score">0.0</span> <span class="max-score">/ ${group.weight}</span></td>`
                           )
                           .join("")}
                     </tr>`;
@@ -594,7 +594,7 @@
               }
             });
           });
-          bodyHTML += `<tr class="font-bold bg-emerald-100 text-lg">
+          bodyHTML += `<tr class="font-bold bg-emerald-700 text-white text-lg">
                     <td>TỔNG CỘNG (Thang 100)</td>
                     <td id="total-weight">100</td>
                     ${vendors
