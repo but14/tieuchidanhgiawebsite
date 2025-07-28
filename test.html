@@ -48,7 +48,7 @@
         cursor: pointer;
         padding: 0.75rem 0.5rem;
         margin-bottom: -1px;
-        font-size: 0.84rem;
+        font-size: 0.875rem;
         font-weight: 400;
         color: #4b5563;
         transition: all 150ms;
@@ -269,17 +269,30 @@
 
     <script>
       const sampleData = {
-        vendors: ["Nhà cung cấp A", "Nhà cung cấp B", "Nhà cung cấp C"],
+        vendors: ["Haco Agency", "OI Agency", "Sao Kim", "Adina Agency"],
         "table-1": [
-          ["Hạng mục", "Nhà cung cấp A", "Nhà cung cấp B", "Nhà cung cấp C"],
-          ["Người liên hệ", "", "", ""],
-          ["Số năm kinh nghiệm", "", "", ""],
-          ["Quy mô công ty (số nhân sự)", "", "", ""],
-          ["Doanh thu trung bình 3 năm gần nhất", "", "", ""],
-          ["Dự án có ngân sách cao nhất đã thực hiện", "", "", ""],
-          ["Tỷ lệ/Số dự án thất bại & Nguyên nhân", "", "", ""],
+          ["Hạng mục", "Haco Agency", "OI Agency", "Sao Kim", "Adina Agency"],
+          [
+            "Người liên hệ",
+            "Phạm Nguyễn Hoàng Long",
+            "Phạm Nguyễn Hoàng Long",
+            "Phạm Nguyễn Hoàng Long",
+            "Phạm Nguyễn Hoàng Long",
+          ],
+          ["Số năm kinh nghiệm", "10 năm", "1 năm", "15 năm", ""],
+          ["Quy mô công ty (số nhân sự)", "50", "40-50 người", "50 - 150", ""],
+          // ["Doanh thu trung bình 3 năm gần nhất", "", "", "", ""],
+          [
+            "Dự án có quy mô cao nhất đã thực hiện",
+            "Cen Group, Viettel",
+            "",
+            "Woori Bank, Asco",
+            "",
+          ],
+          // ["Tỷ lệ/Số dự án thất bại & Nguyên nhân", "", "", "", ""],
           [
             "Các yếu tố quan trọng dẫn đến thành công dự án (theo NCC)",
+            "Giao tiếp chặt chẽ, hiểu rõ mục tiêu, đội ngũ kinh nghiệm",
             "",
             "",
             "",
@@ -288,101 +301,290 @@
         "table-1-5": [
           [
             "Hạng mục Quản lý Dự án & Đội ngũ",
-            "Nhà cung cấp A",
-            "Nhà cung cấp B",
-            "Nhà cung cấp C",
+            "Haco Agency",
+            "OI Agency",
+            "Sao Kim",
+            "Adina Agency",
           ],
-          ["Số lượng & Trình độ nhân sự tham gia dự án", "", "", ""],
-          ["Chứng chỉ/Kinh nghiệm nổi bật của đội ngũ", "", "", ""],
-          ["Mô hình triển khai (Agile, Scrum, Waterfall...)", "", "", ""],
-          ["Công cụ quản lý dự án (Jira, MS Project...)", "", "", ""],
-          ["Quy trình quản lý thay đổi & xử lý mâu thuẫn", "", "", ""],
-          ["Nền tảng AI sử dụng trong dự án (nếu có)", "", "", ""],
+          [
+            "Số lượng & Trình độ nhân sự tham gia dự án",
+            "3 nhân sự",
+            "4 nhân sự",
+            "8 nhân sự",
+            "",
+          ],
+          [
+            "Chứng chỉ/Kinh nghiệm nổi bật của đội ngũ",
+            "PMI-ACP cho Project Manager",
+            "",
+            "",
+            "",
+          ],
+          [
+            "Mô hình triển khai (Agile, Scrum, Waterfall...)",
+            "Agile/Scrum",
+            "Agile/Scrum",
+            "Agile/Scrum",
+            "",
+          ],
+          [
+            "Công cụ quản lý dự án (Jira, MS Project...)",
+            "Jira, Slack, Google Workspace",
+            "Notion",
+            "",
+            "",
+          ],
+          [
+            "Quy trình quản lý thay đổi & xử lý mâu thuẫn",
+            "Chưa rõ",
+            "Chưa rõ",
+            "Chưa rõ",
+            "Chưa rõ",
+          ],
+          ["Nền tảng AI sử dụng trong dự án (nếu có)", "", "", "", ""],
         ],
         "table-2-scores": {
-          "Nhà cung cấp A": {},
-          "Nhà cung cấp B": {},
-          "Nhà cung cấp C": {},
+          "Haco Agency": {},
+          "OI Agency": {},
+          "Sao Kim": {},
+          "Adina Agency": {},
         },
         "table-3": [
           [
             "Hạng mục Kỹ thuật",
-            "Nhà cung cấp A",
-            "Nhà cung cấp B",
-            "Nhà cung cấp C",
+            "Haco Agency",
+            "OI Agency",
+            "Sao Kim",
+            "Adina Agency",
           ],
-          ["Nền tảng Frontend (React, Vue, Next.js...)", "", "", ""],
-          ["Nền tảng Backend & CMS", "", "", ""],
+          [
+            "Nền tảng Frontend (React, Vue, Next.js...)",
+            "Wordpress (Flatsome Theme)",
+            "Wordpress",
+            "Wordpress",
+            "Wordpress",
+          ],
+          [
+            "Nền tảng Backend & CMS",
+            "Wordpress (PHP, MySQL)",
+            "Wordpress (PHP, MySQL)",
+            "Wordpress (PHP, MySQL)",
+            "Wordpress (PHP, MySQL)",
+          ],
           [
             "Nếu là WordPress: Framework sử dụng (Genesis, Underscores...)",
-            "",
-            "",
+            "Sử dụng Theme Flatsome 3.19.5",
+            "Sử dụng Theme Hello, Elementor",
+            "Elementor",
             "",
           ],
           [
             "Nếu là WordPress: Số lượng & tên plugin có phí / miễn phí",
+            "Có plugin miễn phí, bản quyền, và code thêm (Rank Math, Yoast SEO, WP Rocket)",
+            "Có plugin miễn phí, bản quyền, và code thêm (Woocommerce, Elementor, Rank Math)",
+            "Ưu tiên sử dụng plugin miễn phí, dùng plugin bản quyền theo yêu cầu của chủ đầu tư, và code thêm",
+            "",
+          ],
+          [
+            "Nếu là WordPress: Quy trình quản lý xung đột plugin",
+            "Review mã nguồn định kỳ",
+            "Review mã nguồn định kỳ",
+            "Kiểm soát mã nguồn và lập trình, chạy thử trên các trình duyệt",
+            "",
+          ],
+          [
+            "Kiến trúc Hạ tầng (Cloud, VPS, Server riêng...)",
+            "Sử dụng Cloud VPS, có thể mở rộng",
+            "Sử dụng Cloud VPS, có thể mở rộng",
+            "Sử dụng Cloud VPS, có thể mở rộng",
+            "",
+          ],
+          [
+            "Cam kết Core Web Vitals (LCP, INP, CLS)",
+            "LCP < 2.5s, INP < 200ms, CLS < 0.1",
             "",
             "",
             "",
           ],
-          ["Nếu là WordPress: Quy trình quản lý xung đột plugin", "", "", ""],
-          ["Kiến trúc Hạ tầng (Cloud, VPS, Server riêng...)", "", "", ""],
-          ["Cam kết Core Web Vitals (LCP, INP, CLS)", "", "", ""],
-          ["Phương pháp đánh giá bảo mật (Pentest, Scan, ISO...)", "", "", ""],
-          ["Khả năng mở rộng & Chất lượng Code", "", "", ""],
+          [
+            "Phương pháp đánh giá bảo mật (Pentest, Scan, ISO...)",
+            "Không có",
+            "Theo chuẩn ISO 27001",
+            "Dễ dàng tích hợp SSL, thay đổi WordPress database table prefix, Malware Scan, thay đổi WordPress salts & keys, thay đổi cấu trúc đường dẫn đăng nhập và quản trị, chức năng lọc bình luận rác,Tự động chặn IP dựa theo hành vi (Wordfence)",
+            "",
+          ],
+          [
+            "Khả năng mở rộng & Chất lượng Code",
+            "Thấp, chưa tuân thủ theo các tiêu chuẩn",
+            "",
+            "",
+            "",
+          ],
         ],
         "table-4": [
           [
             "Hạng mục Tính năng",
-            "Nhà cung cấp A",
-            "Nhà cung cấp B",
-            "Nhà cung cấp C",
+            "Haco Agency",
+            "OI Agency",
+            "Sao Kim",
+            "Adina Agency",
           ],
-          ["Quy trình thiết kế UI/UX (Wireframe, Prototype...)", "", "", ""],
-          ["Cam kết/Chứng nhận về tính độc quyền của giao diện", "", "", ""],
-          ["Công cụ thiết kế hình ảnh & Tình trạng bản quyền", "", "", ""],
-          ["Module Đặt phòng (Tích hợp API / Xây dựng riêng)", "", "", ""],
-          ["Tích hợp Channel Manager (Nếu có)", "", "", ""],
-          ["Cổng thanh toán tích hợp (Nội địa & Quốc tế)", "", "", ""],
-          ["Nền tảng kỹ thuật SEO (Schema, Sitemap...)", "", "", ""],
+          [
+            "Quy trình thiết kế UI/UX (Wireframe, Prototype...)",
+            "Wireframe > Mockup > Prototype (Figma)",
+            "Wireframe > Mockup > Prototype (Figma)",
+            "Wireframe > Mockup > Prototype (Figma)",
+            "",
+          ],
+          [
+            "Cam kết/Chứng nhận về tính độc quyền của giao diện",
+            "Chưa có cam kết rõ ràng",
+            "Cam kết giao diện độc quyền",
+            "Cam kết giao diện độc quyền",
+            "",
+          ],
+          [
+            "Công cụ thiết kế hình ảnh & Tình trạng bản quyền",
+            "Thiết kế bằng Figma. Hình ảnh sử dụng từ nguồn như Freepik, Unsplash",
+            "Thiết kế bằng Figma, Adobe. Hình ảnh sử dụng từ nhiều nguồn uy tín độc quyền cao Adobe Stock, Shutterstock",
+            "Thiết kế bằng Figma. Hình ảnh sử dụng từ nguồn như Freepik, Unsplash",
+            "",
+          ],
+          [
+            "Module Đặt phòng (Tích hợp API / Xây dựng riêng)",
+            "Chưa có kinh nghiệm thực hiện chức năng booking",
+            "Sẵn sàng tích hợp API của PMS, có thể xây dựng module booking riêng",
+            "Sẵn sàng tích hợp API của PMS, có thể xây dựng module booking riêng",
+            "",
+          ],
+          [
+            "Tích hợp Channel Manager (Nếu có)",
+            "Có, tích hợp qua API của PMS",
+            "Có, tích hợp qua API của PMS",
+            "Có, tích hợp qua API của PMS",
+            "",
+          ],
+          [
+            "Cổng thanh toán tích hợp (Nội địa & Quốc tế)",
+            "Chưa rõ ràng về vấn đề thực hiện này",
+            "Tích hợp cổng thanh toán nội địa (VNPay) và quốc tế (Stripe, Paypal)",
+            "Tích hợp cổng thanh toán nội địa (VNPay) và quốc tế (Stripe, Paypal)",
+            "",
+          ],
+          [
+            "Nền tảng kỹ thuật SEO (Schema, Sitemap...)",
+            "Nền tảng cơ bản, chưa sử dụng plugin chuyên sâu như Rank Math",
+            "",
+            "",
+            "",
+          ],
         ],
         "table-5": [
           [
             "Khoản mục chi phí",
-            "Nhà cung cấp A",
-            "Nhà cung cấp B",
-            "Nhà cung cấp C",
+            "Haco Agency",
+            "OI Agency",
+            "Sao Kim",
+            "Adina Agency",
           ],
-          ["Chi phí Thiết kế & Lập trình (trọn gói)", "", "", ""],
-          ["Chi phí bản quyền (Plugin, Theme, AI Tools...)", "", "", ""],
-          ["Chi phí duy trì (từ năm thứ 2)", "", "", ""],
-          ["Các chi phí ẩn/phát sinh (nếu có)", "", "", ""],
+          [
+            "Chi phí Thiết kế & Lập trình (trọn gói)",
+            "Cần yêu cầu báo giá chi tiết",
+            "60,000,000đ (trọn gói)",
+            "65,000,000đ (trọn gói)",
+            "",
+          ],
+          [
+            "Chi phí bản quyền (Plugin, Theme, AI Tools...)",
+            "5,000,000đ/năm",
+            "Đã bao gồm trong chi phí thiết kế",
+            "Đã bao gồm trong chi phí thiết kế",
+            "",
+          ],
+          [
+            "Chi phí duy trì (từ năm thứ 2)",
+            "20,000,000đ/năm (bao gồm hosting, domain, bảo trì)",
+            "",
+            "5.000.000đ/năm (bao gồm hosting, domain, bảo trì)",
+            "",
+          ],
+          [
+            "Các chi phí ẩn/phát sinh (nếu có)",
+            "Không có, các yêu cầu ngoài phạm vi sẽ được báo giá riêng",
+            "",
+            "Dịch vụ mua domain, hosting, bảo trì sẽ tính phí riêng (theo năm)",
+            "",
+          ],
         ],
         "table-6": [
           [
             "Hạng mục Hậu mãi",
-            "Nhà cung cấp A",
-            "Nhà cung cấp B",
-            "Nhà cung cấp C",
+            "Haco Agency",
+            "OI Agency",
+            "Sao Kim",
+            "Adina Agency",
           ],
-          ["Bàn giao Source Code & Tài liệu kỹ thuật", "", "", ""],
-          ["Công tác bàn giao & hướng dẫn sử dụng bộ thương hiệu", "", "", ""],
-          ["Thời gian bảo hành (số tháng)", "", "", ""],
-          ["Phạm vi bảo hành (Lỗi kỹ thuật, hiệu năng...)", "", "", ""],
-          ["Chính sách sao lưu (Backup) dữ liệu", "", "", ""],
+          [
+            "Bàn giao Source Code & Tài liệu kỹ thuật",
+            "Có, bàn giao toàn bộ source code và tài khoản quản trị",
+            "",
+            "Toàn bộ source code, tài khoản quản trị. File thiết kế đầy đủ các định dạng Adobe XD, Figma",
+            "",
+          ],
+          [
+            "Công tác bàn giao & hướng dẫn sử dụng bộ thương hiệu",
+            "Tổ chức buổi training online, cung cấp video và tài liệu hướng dẫn chi tiết",
+            "",
+            "Link hướng dẫn sử dụng Website. Đào tạo online 2 tiếng sử dụng Website",
+            "",
+          ],
+          [
+            "Thời gian bảo hành (số tháng)",
+            "12 tháng",
+            "24 tháng",
+            "12 tháng",
+            "",
+          ],
+          [
+            "Phạm vi bảo hành (Lỗi kỹ thuật, hiệu năng...)",
+            "Lỗi kỹ thuật phát sinh từ code của NCC, không bao gồm lỗi do người dùng hoặc bên thứ ba",
+            "",
+            "",
+            "",
+          ],
+          [
+            "Chính sách sao lưu (Backup) dữ liệu",
+            "Chưa đề cập, cần làm rõ",
+            "",
+            "",
+            "",
+          ],
           [
             "Kênh & Thời gian hỗ trợ kỹ thuật (Email, Zalo, 24/7...)",
+            "Email, Zalo, ticket system.",
             "",
             "",
             "",
           ],
         ],
         "table-8-swot": [
-          ["Phân tích", "Nhà cung cấp A", "Nhà cung cấp B", "Nhà cung cấp C"],
-          ["Strengths (Điểm mạnh)", "", "", ""],
-          ["Weaknesses (Điểm yếu)", "", "", ""],
-          ["Opportunities (Cơ hội)", "", "", ""],
-          ["Threats (Thách thức)", "", "", ""],
+          ["Phân tích", "Haco Agency", "OI Agency", "Sao Kim", "Adina Agency"],
+          [
+            "Strengths (Điểm mạnh)",
+            "Chuyên về thiết kế giao diện web chuyên nghiệp (Figma). Tập trung vào chuyển đổi kinh doanh.",
+            "",
+            "",
+            "",
+          ],
+          [
+            "Weaknesses (Điểm yếu)",
+            "Chưa có kinh nghiệm thực hiện chức năng booking. Website của NCC chưa được tối ưu để lên top. Không cung cấp các dịch vụ backend/CMS, marketing automation, email marketing, quản lý quảng cáo.",
+            "",
+            "",
+            "",
+          ],
+          ["Opportunities (Cơ hội)", "", "", "", ""],
+          ["Threats (Thách thức)", "", "", "", ""],
         ],
       };
 
@@ -558,7 +760,7 @@
 
           let bodyHTML = `<tbody>`;
           structure.forEach((group) => {
-            bodyHTML += `<tr class="bg-gray-100 font-bold">
+            bodyHTML += `<tr class="bg-emerald-100 text-emerald-900 font-bold text-base border-t-2 border-gray-300">
                         <td>${group.title}</td>
                         <td data-weight-group="${group.key}">${
               group.weight
@@ -566,7 +768,7 @@
                         ${vendors
                           .map(
                             (v, i) =>
-                              `<td class="group-score-display" data-score-group="${group.key}" data-vendor-index="${i}"><span class="score">0.0</span> <span class="max-score">/ ${group.weight}</span></td>`
+                              `<td class="group-score-display bg-emerald-200" data-score-group="${group.key}" data-vendor-index="${i}"><span class="score">0.0</span> <span class="max-score">/ ${group.weight}</span></td>`
                           )
                           .join("")}
                     </tr>`;
@@ -594,7 +796,7 @@
               }
             });
           });
-          bodyHTML += `<tr class="font-bold bg-emerald-100 text-lg">
+          bodyHTML += `<tr class="font-bold bg-emerald-700 text-white text-lg">
                     <td>TỔNG CỘNG (Thang 100)</td>
                     <td id="total-weight">100</td>
                     ${vendors
