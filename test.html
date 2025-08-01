@@ -269,23 +269,45 @@
 
     <script>
       const sampleData = {
-        vendors: ["Haco Agency", "OI Agency", "Sao Kim", "Adina Agency"],
+        vendors: [
+          "Haco Agency",
+          "OI Agency",
+          "Sao Kim",
+          "Adina Agency",
+          "SweetSoft",
+        ],
         "table-1": [
-          ["Hạng mục", "Haco Agency", "OI Agency", "Sao Kim", "Adina Agency"],
+          [
+            "Hạng mục",
+            "Haco Agency",
+            "OI Agency",
+            "Sao Kim",
+            "Adina Agency",
+            "SweetSoft",
+          ],
           [
             "Người liên hệ",
             "Phạm Nguyễn Hoàng Long",
             "Phạm Nguyễn Hoàng Long",
             "Phạm Nguyễn Hoàng Long",
             "Phạm Nguyễn Hoàng Long",
+            "Cần cung cấp",
           ],
-          ["Số năm kinh nghiệm", "10 năm", "5 năm", "15 năm", "13 năm"],
+          [
+            "Số năm kinh nghiệm",
+            "10 năm",
+            "5 năm",
+            "15 năm",
+            "13 năm",
+            "18 năm",
+          ],
           [
             "Quy mô công ty (số nhân sự)",
             "40-50 nhân sự",
             "40-50 nhân sự",
             "50 - 150 nhân sự",
             "40-50 nhân sự",
+            "50+ nhân sự",
           ],
           [
             "Dự án có quy mô cao nhất đã thực hiện",
@@ -293,6 +315,7 @@
             "The Anam, Six Senses",
             "Woori Bank, Ascott",
             "Phương Nam Resort",
+            "I Resort, Costa Seafood",
           ],
           [
             "Các yếu tố quan trọng dẫn đến thành công dự án (theo NCC)",
@@ -300,6 +323,7 @@
             "Thấu hiểu insight khách hàng, quy trình tinh gọn, công nghệ hiện đại",
             "Nghiên cứu sâu, thiết kế sáng tạo, thực thi chuyên nghiệp",
             "",
+            "Công nghệ phù hợp, quy trình chuyên nghiệp, đội ngũ am hiểu nghiệp vụ",
           ],
         ],
         "table-1-5": [
@@ -309,6 +333,7 @@
             "OI Agency",
             "Sao Kim",
             "Adina Agency",
+            "SweetSoft",
           ],
           [
             "Số lượng & Trình độ nhân sự tham gia dự án",
@@ -316,6 +341,7 @@
             "4 nhân sự",
             "8 nhân sự",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "16 nhân sự",
           ],
           [
             "Chứng chỉ/Kinh nghiệm nổi bật của đội ngũ",
@@ -323,6 +349,7 @@
             "Đội ngũ có chứng chỉ Google, Meta",
             "Nhiều năm kinh nghiệm với các đối tác lớn, đội ngũ designer mạnh",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Đội ngũ có kinh nghiệm lập trình .NET, SQL Server cho các hệ thống lớn",
           ],
           [
             "Mô hình triển khai (Agile, Scrum, Waterfall...)",
@@ -330,6 +357,7 @@
             "Agile/Scrum",
             "Agile/Scrum",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Agile/Scrum",
           ],
           [
             "Công cụ quản lý dự án (Jira, MS Project...)",
@@ -337,12 +365,14 @@
             "Notion, Slack",
             "Base.vn, Jira",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Jira, Azure DevOps",
           ],
           [
             "Quy trình quản lý thay đổi & xử lý mâu thuẫn",
             "Chưa rõ, cần làm rõ khi họp",
             "Quy trình Change Request (CR) rõ ràng, báo giá chi tiết cho các thay đổi",
             "Linh hoạt, có quy trình quản lý thay đổi và xử lý khủng hoảng",
+            "Nhà cung cấp chưa bổ sung thông tin này",
             "Nhà cung cấp chưa bổ sung thông tin này",
           ],
           [
@@ -351,6 +381,7 @@
             "Sử dụng AI trong tối ưu hình ảnh và tối ưu trải nghiệm người dùng",
             "Sử dụng AI trong tối ưu hình ảnh và tối ưu trải nghiệm người dùng",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Chưa rõ",
           ],
         ],
         "table-2-scores": {
@@ -442,6 +473,28 @@
             E2: 1,
             E3: 1,
           },
+          SweetSoft: {
+            A1: 9,
+            A2: 8,
+            A3: 8,
+            B1: 9,
+            B2: 0,
+            B3: 9,
+            B4: 8,
+            B5: 9,
+            C1: 6,
+            C2: 8,
+            C3: 10,
+            C4: 7,
+            F1: 8,
+            F2: 7,
+            F3: 8,
+            D1: 6,
+            D2: 8,
+            E1: 8,
+            E2: 8,
+            E3: 8,
+          },
         },
         "table-3": [
           [
@@ -450,6 +503,7 @@
             "OI Agency",
             "Sao Kim",
             "Adina Agency",
+            "SweetSoft",
           ],
           [
             "Nền tảng Frontend (React, Vue, Next.js...)",
@@ -457,6 +511,7 @@
             "Wordpress",
             "Wordpress",
             "Wordpress",
+            ".NET (ASP.NET Core MVC / Razor Pages)",
           ],
           [
             "Nền tảng Backend & CMS",
@@ -464,6 +519,7 @@
             "Wordpress (PHP, MySQL)",
             "Wordpress (PHP, MySQL)",
             "Wordpress (PHP, MySQL)",
+            ".NET, SQL Server",
           ],
           [
             "Nếu là WordPress: Framework sử dụng (Genesis, Underscores...)",
@@ -471,6 +527,7 @@
             "Sử dụng Theme Hello, Elementor, code tùy chỉnh",
             "Elementor, code tùy chỉnh",
             "Flatsome, code tùy chỉnh",
+            "Không áp dụng",
           ],
           [
             "Nếu là WordPress: Số lượng & tên plugin có phí / miễn phí",
@@ -478,6 +535,7 @@
             "Có plugin miễn phí, bản quyền, và code thêm (Woocommerce, Elementor Pro, Rank Math Pro)",
             "Ưu tiên sử dụng plugin miễn phí, dùng plugin bản quyền theo yêu cầu của chủ đầu tư, và code thêm",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Không áp dụng, tính năng được code tay",
           ],
           [
             "Nếu là WordPress: Quy trình quản lý xung đột plugin",
@@ -485,6 +543,7 @@
             "Kiểm tra trên môi trường Staging, review mã nguồn trước khi triển khai",
             "Kiểm soát mã nguồn và lập trình, chạy thử trên các trình duyệt",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Không áp dụng",
           ],
           [
             "Kiến trúc Hạ tầng (Cloud, VPS, Server riêng...)",
@@ -492,6 +551,7 @@
             "Sử dụng Cloud VPS, có thể mở rộng",
             "Sử dụng Cloud VPS, có thể mở rộng",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Cloud Server (Azure/AWS) hoặc VPS cấu hình cao",
           ],
           [
             "Cam kết Core Web Vitals (LCP, INP, CLS)",
@@ -499,6 +559,7 @@
             "Cam kết pass các chỉ số Core Web Vitals (Good)",
             "Cam kết tối ưu tốc độ và Core Web Vitals",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Cam kết tối ưu và pass các chỉ số Core Web Vitals",
           ],
           [
             "Phương pháp đánh giá bảo mật (Pentest, Scan, ISO...)",
@@ -506,6 +567,7 @@
             "Theo chuẩn ISO 27001",
             "Tích hợp SSL, thay đổi prefix, Malware Scan, thay đổi salts & keys, thay đổi đường dẫn đăng nhập, chặn IP (Wordfence)",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Có pentest (tự thực hiện hoặc CĐT thuê ngoài), tuân thủ các best practice về bảo mật của .NET",
           ],
           [
             "Khả năng mở rộng & Chất lượng Code",
@@ -513,6 +575,7 @@
             "Cao, code sạch, có tài liệu, dễ dàng nâng cấp",
             "Rất tốt, dễ bảo trì, tuân thủ các chuẩn quốc tế",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Rất cao, phù hợp cho hệ thống lớn, phức tạp. Code được quản lý version (Git)",
           ],
         ],
         "table-4": [
@@ -522,6 +585,7 @@
             "OI Agency",
             "Sao Kim",
             "Adina Agency",
+            "SweetSoft",
           ],
           [
             "Quy trình thiết kế UI/UX (Wireframe, Prototype...)",
@@ -529,6 +593,7 @@
             "Wireframe > Mockup > Prototype (Figma)",
             "Wireframe > Mockup > Prototype (Figma)",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Sử dụng công cụ của nền tảng để thiết kế. Cần làm rõ quy trình chi tiết.",
           ],
           [
             "Cam kết/Chứng nhận về tính độc quyền của giao diện",
@@ -536,6 +601,7 @@
             "Cam kết giao diện độc quyền",
             "Cam kết giao diện độc quyền",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Cam kết giao diện độc quyền, thiết kế theo yêu cầu",
           ],
           [
             "Công cụ thiết kế hình ảnh & Tình trạng bản quyền",
@@ -543,6 +609,7 @@
             "Thiết kế bằng Figma, Adobe. Hình ảnh sử dụng từ nhiều nguồn uy tín độc quyền cao Adobe Stock, Shutterstock",
             "Thiết kế bằng Figma. Hình ảnh sử dụng từ nguồn như Freepik, Unsplash, có mua ảnh bản quyền khi cần",
             "Thiết kế bằng Figma, Adobe",
+            "Cần làm rõ. Giả định sử dụng các công cụ thiết kế chuẩn như Adobe.",
           ],
           [
             "Module Đặt phòng (Tích hợp API / Xây dựng riêng)",
@@ -550,6 +617,7 @@
             "Sẵn sàng tích hợp API của PMS, có thể xây dựng module booking riêng",
             "Sẵn sàng tích hợp API của PMS, có thể xây dựng module booking riêng",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Xây dựng riêng trên nền tảng .NET, khả năng tích hợp API mạnh mẽ với các hệ thống PMS/booking khác",
           ],
           [
             "Tích hợp Channel Manager (Nếu có)",
@@ -557,6 +625,7 @@
             "Có, tích hợp qua API của PMS",
             "Có, tích hợp qua API của PMS",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Rất mạnh, tích hợp sâu qua API",
           ],
           [
             "Cổng thanh toán tích hợp (Nội địa & Quốc tế)",
@@ -564,6 +633,7 @@
             "Tích hợp cổng thanh toán nội địa (VNPay) và quốc tế (Stripe, Paypal)",
             "Tích hợp cổng thanh toán nội địa (VNPay) và quốc tế (Stripe, Paypal)",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Tích hợp đa dạng cổng thanh toán theo yêu cầu (VNPay, Stripe, Paypal...)",
           ],
           [
             "Nền tảng kỹ thuật SEO (Schema, Sitemap...)",
@@ -571,6 +641,7 @@
             "Tối ưu SEO on-page toàn diện, cấu trúc schema, Rank Math Pro",
             "Cấu trúc chuẩn SEO, hỗ trợ các plugin SEO phổ biến, tư vấn chiến lược",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Tùy chỉnh và tối ưu toàn diện (schema, sitemap, rewrite URLs...)",
           ],
         ],
         "table-5": [
@@ -580,6 +651,7 @@
             "OI Agency",
             "Sao Kim",
             "Adina Agency",
+            "SweetSoft",
           ],
           [
             "Chi phí Thiết kế & Lập trình (trọn gói)",
@@ -587,6 +659,7 @@
             "60,000,000đ (trọn gói)",
             "80,000,000đ (trọn gói)",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "162,300,000đ (trọn gói, đã bao gồm hosting năm đầu)",
           ],
           [
             "Chi phí bản quyền (Plugin, Theme, AI Tools...)",
@@ -594,13 +667,15 @@
             "Đã bao gồm trong chi phí thiết kế",
             "Đã bao gồm trong chi phí thiết kế",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Đã bao gồm trong chi phí thiết kế (trừ các yêu cầu đặc biệt)",
           ],
           [
             "Chi phí duy trì (từ năm thứ 2)",
-            "20,000,000đ/năm",
-            "6,000,000đ/năm",
+            "Nhà cung cấp chưa bổ sung thông tin này",
+            "Nhà cung cấp chưa bổ sung thông tin này",
             "5,000,000đ/năm (bao gồm hosting, domain, bảo trì)",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "3,960,000đ/năm (chi phí hosting)",
           ],
           [
             "Các chi phí ẩn/phát sinh (nếu có)",
@@ -608,6 +683,7 @@
             "Cam kết không chi phí ẩn, mọi phát sinh được báo giá trước",
             "Dịch vụ mua domain, hosting, bảo trì sẽ tính phí riêng (theo năm)",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Cam kết không chi phí ẩn, các yêu cầu ngoài phạm vi sẽ được báo giá riêng",
           ],
         ],
         "table-6": [
@@ -617,6 +693,7 @@
             "OI Agency",
             "Sao Kim",
             "Adina Agency",
+            "SweetSoft",
           ],
           [
             "Bàn giao Source Code & Tài liệu kỹ thuật",
@@ -624,6 +701,7 @@
             "Bàn giao đầy đủ source code, tài liệu và video hướng dẫn",
             "Toàn bộ source code, tài khoản quản trị. File thiết kế đầy đủ các định dạng Adobe XD, Figma",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Có, bàn giao toàn bộ source code .NET, database và tài liệu kỹ thuật",
           ],
           [
             "Công tác bàn giao & hướng dẫn sử dụng bộ thương hiệu",
@@ -631,6 +709,7 @@
             "Training online 1-1, tài liệu hướng dẫn chi tiết",
             "Link hướng dẫn sử dụng Website. Đào tạo online 2 tiếng sử dụng Website",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Training trực tiếp/online, cung cấp tài liệu hướng dẫn chi tiết",
           ],
           [
             "Thời gian bảo hành (số tháng)",
@@ -638,6 +717,7 @@
             "24 tháng",
             "12 tháng",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "24 tháng",
           ],
           [
             "Phạm vi bảo hành (Lỗi kỹ thuật, hiệu năng...)",
@@ -645,6 +725,7 @@
             "Bảo hành toàn bộ lỗi kỹ thuật & hiệu năng, hỗ trợ tư vấn sử dụng",
             "Bảo hành lỗi kỹ thuật của hệ thống",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Bảo hành lỗi kỹ thuật của hệ thống do NCC phát triển",
           ],
           [
             "Chính sách sao lưu (Backup) dữ liệu",
@@ -652,6 +733,7 @@
             "Backup tự động hàng ngày, lưu trữ 14 ngày",
             "Backup định kỳ theo tuần",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Backup tự động hàng ngày (lưu trữ 7-14 ngày)",
           ],
           [
             "Kênh & Thời gian hỗ trợ kỹ thuật (Email, Zalo, 24/7...)",
@@ -659,16 +741,25 @@
             "Hệ thống ticket, Zalo, Email. Hỗ trợ 24/7 cho các lỗi nghiêm trọng",
             "Email, Hotline (giờ hành chính)",
             "Nhà cung cấp chưa bổ sung thông tin này",
+            "Không có hệ thống ticket, hỗ trợ qua Email, Zalo, Hotline (giờ hành chính)",
           ],
         ],
         "table-8-swot": [
-          ["Phân tích", "Haco Agency", "OI Agency", "Sao Kim", "Adina Agency"],
+          [
+            "Phân tích",
+            "Haco Agency",
+            "OI Agency",
+            "Sao Kim",
+            "Adina Agency",
+            "SweetSoft",
+          ],
           [
             "Strengths (Điểm mạnh)",
             "Quy trình thiết kế UI/UX tốt trên Figma. Có kinh nghiệm quản lý dự án theo mô hình Agile/Scrum.",
             "Năng lực toàn diện, cân bằng. Chính sách hậu mãi vượt trội (bảo hành 24 tháng, hỗ trợ 24/7). Chi phí hợp lý và minh bạch. Quy trình làm việc và kỹ thuật rõ ràng.",
             "Kinh nghiệm lâu năm nhất (15 năm) và portfolio với các khách hàng lớn. Năng lực kỹ thuật và bảo mật rất mạnh, quy trình chi tiết. Đội ngũ dự án đông đảo.",
             "Số năm kinh nghiệm trên thị trường khá tốt (13 năm). Đã thực hiện dự án trong ngành (Phương Nam Resort).",
+            "Nền tảng công nghệ .NET/SQL Server rất mạnh, khả năng mở rộng và tùy biến cao, lý tưởng cho các hệ thống booking phức tạp. Đội ngũ dự án lớn (16 người).",
           ],
           [
             "Weaknesses (Điểm yếu)",
@@ -676,6 +767,7 @@
             "Số năm kinh nghiệm ít hơn so với Sao Kim và Adina, có thể là một điểm cân nhắc đối với các dự án đòi hỏi kinh nghiệm thị trường sâu rộng.",
             "Chi phí triển khai cao nhất trong các nhà cung cấp. Chính sách hậu mãi (bảo hành 12 tháng, hỗ trợ giờ hành chính) kém cạnh tranh hơn so với OI.",
             "Gần như toàn bộ thông tin về quy trình, kỹ thuật, tính năng, chi phí và hậu mãi đều không được cung cấp. Thể hiện sự thiếu chuyên nghiệp trong quá trình tư vấn và trình bày giải pháp.",
+            "Chi phí triển khai cao nhất. Quy trình thiết kế UI/UX chưa được mô tả rõ ràng so với các đối thủ dùng Figma. Trách nhiệm Pentest chưa rõ ràng (khách hàng có thể phải tự tìm).",
           ],
           [
             "Opportunities (Cơ hội)",
@@ -683,6 +775,7 @@
             "Có thể trở thành lựa chọn hàng đầu cho các dự án yêu cầu chất lượng cao với ngân sách hợp lý, đặc biệt với chính sách bảo hành an toàn.",
             "Phù hợp với các tập đoàn lớn, yêu cầu cao về kinh nghiệm, quy mô và sự an toàn, ít nhạy cảm về giá.",
             "Cần cải thiện toàn diện về quy trình làm việc và cung cấp thông tin cho khách hàng để có thể tận dụng kinh nghiệm sẵn có.",
+            "Dẫn đầu phân khúc khách sạn/resort lớn, yêu cầu hệ thống website mạnh, tích hợp sâu với phần mềm quản lý (PMS) và có khả năng mở rộng trong tương lai.",
           ],
           [
             "Threats (Thách thức)",
@@ -690,6 +783,7 @@
             "Cần phải liên tục chứng minh năng lực để cạnh tranh với các agency có lịch sử lâu đời hơn như Sao Kim.",
             "Có thể mất khách hàng vào tay các đối thủ linh hoạt và có chi phí tốt hơn như OI, đặc biệt là các dự án của SME.",
             "Sẽ bị loại ngay từ vòng đầu trong các cuộc đấu thầu cạnh tranh do thiếu thông tin và sự thiếu chuyên nghiệp.",
+            "Giá cao có thể là rào cản với các khách sạn có ngân sách hạn chế. Có thể bị xem là 'over-kill' (vượt quá yêu cầu) cho các dự án đơn giản.",
           ],
         ],
       };
@@ -1034,7 +1128,8 @@
           const rows = table.querySelectorAll("tbody tr");
           rows.forEach((row) => {
             const rowData = [];
-            row.querySelectorAll("td").forEach((cell) => {
+            row.querySelectorAll("td, th").forEach((cell) => {
+              // Use innerText to get text content, works for both td and th
               rowData.push(cell.innerText);
             });
             data.push(rowData);
@@ -1044,8 +1139,7 @@
 
         function updateEvaluationBasis() {
           const basisMap = {
-            A2: { tableId: "table-1", term: "Doanh thu", tab: 1 },
-            A3: { tableId: "table-1-5", term: "Trình độ nhân sự", tab: 2 },
+            A3: { tableId: "table-1-5", term: "Số lượng & Trình độ", tab: 2 },
             B1: { tableId: "table-3", term: "Nền tảng Backend", tab: 4 },
             B2: { tableId: "table-3", term: "Framework sử dụng", tab: 4 },
             B3: { tableId: "table-3", term: "Core Web Vitals", tab: 4 },
@@ -1059,26 +1153,49 @@
             D1: { tableId: "table-5", term: "Chi phí Thiết kế", tab: 6 },
             D2: { tableId: "table-5", term: "Chi phí duy trì", tab: 6 },
             E1: { tableId: "table-6", term: "Thời gian bảo hành", tab: 7 },
-            E2: { tableId: "table-6", term: "bàn giao", tab: 7 },
+            E2: { tableId: "table-6", term: "Bàn giao Source Code", tab: 7 },
             E3: { tableId: "table-6", term: "Chính sách sao lưu", tab: 7 },
           };
           const vendors = Array.from(
             document.querySelectorAll("#table-2 thead th[contenteditable]")
           ).map((th) => th.innerText);
+
+          // Special handling for A2 as it has no specific row term
+          const a2BasisCell = document.querySelector('[data-basis-for="A2"]');
+          if (a2BasisCell) {
+            a2BasisCell.innerHTML = `<strong>Cơ sở (Tab 1):</strong> Đánh giá dựa trên thông tin chung như Quy mô công ty, Số năm kinh nghiệm, Các dự án đã thực hiện.`;
+          }
+
           Object.keys(basisMap).forEach((itemKey) => {
             const basisCell = document.querySelector(
               `[data-basis-for="${itemKey}"]`
             );
             if (basisCell) {
               const { tableId, term, tab } = basisMap[itemKey];
+              // Fetch header from the source table to correctly map vendor data
+              const sourceTableHeader = Array.from(
+                document.querySelectorAll(`#${tableId} thead th`)
+              ).map((th) => th.innerText);
               const tableData = getTableData(tableId);
+
               const dataRow = tableData.find((r) =>
                 r[0].toLowerCase().includes(term.toLowerCase())
               );
-              let basisText = `<strong>Cơ sở (Tab ${tab}):</strong> ${term} | `;
+
+              let basisText = `<strong>Cơ sở (Tab ${tab}):</strong> ${
+                dataRow ? dataRow[0] : term
+              } | `;
               if (dataRow) {
                 basisText += vendors
-                  .map((v, i) => `${v}: ${dataRow[i + 1] || "N/A"}`)
+                  .map((v) => {
+                    const vendorIndexInSource = sourceTableHeader.findIndex(
+                      (header) => header === v
+                    );
+                    if (vendorIndexInSource !== -1) {
+                      return `${v}: ${dataRow[vendorIndexInSource] || "N/A"}`;
+                    }
+                    return `${v}: N/A`;
+                  })
                   .join("; ");
               } else {
                 basisText += "Không tìm thấy dữ liệu.";
@@ -1203,7 +1320,13 @@
             });
           };
 
-          const chartColors = ["#3b82f6", "#10b981", "#f97316", "#8b5cf6"];
+          const chartColors = [
+            "#3b82f6",
+            "#10b981",
+            "#f97316",
+            "#8b5cf6",
+            "#ef4444",
+          ];
           createGroupChart(
             "competencyChart",
             "Điểm Năng lực",
@@ -1279,10 +1402,7 @@
             const vendorName =
               document.querySelector("#table-1 th:nth-child(2)")?.innerText ||
               "SoSanh";
-            XLSX.writeFile(
-              wb,
-              `So_Sanh_Nha_Cung_Cap_${vendorName.replace(/\s+/g, "_")}.xlsx`
-            );
+            XLSX.writeFile(wb, `So_Sanh_Nha_Cung_Cap_ibala.xlsx`);
           });
 
         loadAllData();
@@ -1296,10 +1416,14 @@
                 'td[contenteditable="true"], th[contenteditable="true"]'
               )
             ) {
+              // No need to call all functions on every input, can be slow.
+              // Main calculation is what's needed.
               calculateScores();
-              updateEvaluationBasis();
             }
           });
+
+        // Initial dashboard load
+        updateDashboard();
       });
     </script>
   </body>
